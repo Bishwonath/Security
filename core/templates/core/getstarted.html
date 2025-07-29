@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container mx-auto my-14 md:px-6">
+        <section class="background-radial-gradient mb-32">
+          <style>
+            .background-radial-gradient {
+              background-color: hsl(218, 41%, 15%);
+              background-image: radial-gradient(
+                  650px circle at 0% 0%,
+                  hsl(218, 41%, 35%) 15%,
+                  hsl(218, 41%, 30%) 35%,
+                  hsl(218, 41%, 20%) 75%,
+                  hsl(218, 41%, 19%) 80%,
+                  transparent 100%
+                ),
+                radial-gradient(
+                  1250px circle at 100% 100%,
+                  hsl(218, 41%, 45%) 15%,
+                  hsl(218, 41%, 30%) 35%,
+                  hsl(218, 41%, 20%) 75%,
+                  hsl(218, 41%, 19%) 80%,
+                  transparent 100%
+                );
+            }
+          </style>
+      
+          <div class="px-6 py-12 text-center md:px-12 lg:text-left">
+            <div class="container mx-auto xl:px-32">
+              <div class="flex grid items-center gap-12 lg:grid-cols-2">
+                <div class="mt-12 lg:mt-0">
+                  <h1
+                    class="mb-6 text-5xl font-bold tracking-tight text-white md:text-6xl xl:text-7xl"
+                  >
+                    The best offer <br /><span class="text-gray-300"
+                      >for your Services</span
+                    >
+                  </h1>
+                  <a
+                    class="mb-2 inline-block rounded bg-neutral-50 px-12 pt-4 pb-3.5 text-sm font-medium uppercase leading-normal text-neutral-800 transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-[0_8px_9px_-4px_rgba(203,203,203,0.3),0_4px_18px_0_rgba(203,203,203,0.2)] shadow-[0_4px_9px_-4px_rgba(251,251,251,0.3)] hover:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.1),0_4px_18px_0_rgba(251,251,251,0.05)] focus:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.1),0_4px_18px_0_rgba(251,251,251,0.05)] active:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.1),0_4px_18px_0_rgba(251,251,251,0.05)] md:mr-2 md:mb-0"
+                    data-te-ripple-init
+                    data-te-ripple-color="light"
+                    role="button"
+                    href="{% url 'core:signup' %}"
+                    >Get started</a
+                  >
+      
+                </div>
+                <div class="mb-12 lg:mb-0">
+                  <img
+                    src="media\static\images\mathiko2.png"
+                    class="w-full rounded-lg shadow-lg"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+</body>
+</html>

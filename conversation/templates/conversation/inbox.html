@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+{% block title %}Inbox{% endblock %}
+
+{% block content %}
+    <h1 class="ml-10 mb-6 mt-3 text-3xl">Inbox</h1>
+    <div class="mx-10 space-y-6">
+        {% for conversation in conversations %}
+            <a href="{% url 'conversation:detail' pk=conversation.pk %}" class="block">
+                <div class="p-4 rounded-lg shadow-md hover:shadow-lg {% if conversation.messages.last.created_by != request.user %}bg-blue-100{% else %}bg-white{% endif %}">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <img src="{{ conversation.item.image.url }}" class="w-16 h-16 rounded-full mr-4">
+                            <div>
+                                <p class="mb-1"><strong class="text-blue-500">{{ conversation.item.name }}</strong></p>
+                                <p class="text-gray-600">
+                                    Sent by: <strong>{{ conversation.messages.last.created_by.username }}</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <span class="text-gray-500">&#10132;</span>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

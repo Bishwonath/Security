@@ -1,0 +1,66 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Sign Up {% endblock %}
+
+{% block content %}
+<section class="bg-gradient-to-r from-yellow-100 to-indigo-100 h-screen flex items-center justify-center">
+    <div class="w-full max-w-md">
+        <div class="w-full bg-white rounded-lg shadow-md">
+            <div class="p-4 space-y-8 md:space-y-4 sm:p-6">
+                <h1 class="text-lg font-bold leading-tight tracking-tight text-gray-900 md:text-xl">
+                    Create an account
+                </h1>
+                <form action="." method="post" class="space-y-2 md:space-y-4">
+                    {% csrf_token %}
+
+                    <div>
+                        <label for="{{ form.username.id_for_label }}" class="block mb-1 text-sm font-medium text-gray-900">Username</label>
+                        {{ form.username }}
+                    </div>
+
+                    <div>
+                        <label for="{{ form.email.id_for_label }}" class="block mb-1 text-sm font-medium text-gray-900">Email</label>
+                        {{ form.email }}
+                    </div>
+
+                    <div>
+                        <label for="{{ form.password1.id_for_label }}" class="block mb-1 text-sm font-medium text-gray-900">Password</label>
+                        {{ form.password1 }}
+                    </div>
+
+                    <div>
+                        <label for="{{ form.password2.id_for_label }}" class="block mb-1 text-sm font-medium text-gray-900">Confirm Password</label>
+                        {{ form.password2 }}
+                    </div>
+
+                    <hr class="my-4 border-t border-gray-300">
+
+                    <div class="flex items-start">
+                        <div class="flex items-center h-4">
+                            <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-100 focus:ring-3 focus:ring-primary-300" required="">
+                        </div>
+                        <div class="ml-2 text-xs">
+                            <label for="terms" class="font-light text-gray-500">I accept the <a class="font-medium text-primary-600 hover:underline" href="{% url 'core:terms' %}">Terms and Conditions</a></label>
+                        </div>
+                    </div>
+
+                    {% if form.errors or form.non_field_errors %}
+                        <div class="mt-2 p-4 bg-red-100 rounded-xl">
+                            {% for field in form %}
+                                {{ field.errors }}
+                            {% endfor %}
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+                    <button type="submit" class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-xs md:text-sm px-4 py-2 text-center">Create an account</button>
+
+                    <p class="text-xs font-light text-gray-500 mt-2">
+                        Already have an account? <a href="{% url 'core:login' %}" class="font-medium text-red-600 hover:underline">Login here</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

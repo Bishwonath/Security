@@ -1,0 +1,224 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+
+<body>
+    <nav
+    class="fixed top-0 left-0 right-0 z-40 px-12 py-4  flex flex-col lg:flex-row justify-evenly items-center border-b border-gray-200 bg-amber-300"
+  >
+    <div class="flex items-center justify-between lg:justify-start">
+      <div class="flex items-center">
+        <img
+          src="{% static 'images/logo.png' %}"
+          width="30"
+          height="30"
+          class="ml-0 mr-3"
+        />
+        <a href="/" class="text-xl font-bold text-blue-950 inline-block"
+          >NestFixer</a
+        >
+      </div>
+    </div>
+
+    <!-- Categories dropdown -->
+<!-- Categories dropdown -->
+
+
+
+    <form class="flex items-center" action="{% url 'item:items' %}" method="get">
+      <div class="relative">
+        <button id="dropdownCategoriesButton" data-dropdown-toggle="dropdownCategories" class="mr-0 text-black hover:text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">
+            Categories
+            <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+            </svg>
+        </button>
+      
+        <div id="dropdownCategories" class="z-10 absolute top-full left-0 hidden bg-white divide-y divide-gray-700 rounded-lg shadow w-44">
+            <!-- Categories dropdown content -->
+            <div class="flex flex-col p-2">
+                {% for category in categories %}
+                    <a href="#" class="py-1">
+                        <div class="flex items-center">
+                            <a class="text-sm text-gray-700" href="{% url 'item:items' %}?query={{ query }}&Category={{ category.id }}" >{{ category.name }}</a>
+                            <span class="text-xs text-gray-500 ml-2">{{ category.items.count }}</span>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+      </div>
+      
+      <script>
+        // Add event listeners for the Categories dropdown
+        const dropdownCategoriesButton = document.getElementById("dropdownCategoriesButton");
+        const dropdownCategoriesMenu = document.getElementById("dropdownCategories");
+      
+        dropdownCategoriesButton.addEventListener("click", function (event) {
+            event.stopPropagation();
+            dropdownCategoriesMenu.classList.toggle("hidden");
+        });
+      
+        document.addEventListener("click", function (event) {
+            if (!dropdownCategoriesMenu.contains(event.target) && event.target !== dropdownCategoriesButton) {
+                dropdownCategoriesMenu.classList.add("hidden");
+            }
+        });
+      </script>
+      <label for="default-search" class="sr-only">Search</label>
+      <div class="relative flex items-center">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          </svg>
+        </div>
+        <input type="search" id="default-search" name="query" class="block w-96 p-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 pl-10" placeholder="Search Here...." required/>
+        <button type="submit" class="text-white absolute end-2.5 bottom-1.2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          Search
+        </button>
+      </div>
+    </form>
+
+    <div class="lg:flex lg:items-center lg:justify-end lg:space-x-6 relative">
+      <div class="space-x-6">
+        <a
+          href="{% url 'item:new' %}"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center me-2"
+          >Add New Post</a
+        >
+
+        <button class="mr-0 text-black hover:text-white font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center">
+        <a
+          href="{% url 'item:items' %}"
+          class="text-lg font-semibold text-blue-950 hover:text-white hover:underline inline-flex items-center"
+          >Browse
+          <svg class="w-4 h-4 text-black dark:black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+          </svg>
+        </a>
+        </button>
+
+        <span class="border-l-2 border-black mx-2 h-12 rounded-full"></span>
+
+        {% if request.user.is_authenticated %}
+        <button
+          id="dropdownInformationButton"
+          data-dropdown-toggle="dropdownInformation"
+          class="text-black bg-white hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 text-center inline-flex items-center"
+          type="button"
+        >
+        <svg class="w-5 h-t mr-1 text-black dark:black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 9h3m-3 3h3m-3 3h3m-6 1c-.3-.6-1-1-1.6-1H7.6c-.7 0-1.3.4-1.6 1M4 5h16c.6 0 1 .4 1 1v12c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1V6c0-.6.4-1 1-1Zm7 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
+        </svg>
+
+          My Profile
+          <svg
+            class="w-2.5 h-2.5 ms-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 10 6"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 1 4 4 4-4"
+            />
+          </svg>
+        </button>
+
+        <div
+          id="dropdownInformation"
+          class="z-10 absolute top-full right-0 hidden bg-white divide-y divide-gray-700 rounded-lg shadow w-44"
+        >
+          <div class="px-4 py-3 text-sm text-gray-900">
+            <div class="font-medium truncate py-2">
+              {{ request.user.email }}
+            </div>
+            <div class="font-medium truncate py-2">
+              {{ request.user.username }}
+            </div>
+          </div>
+          <ul
+            class="py-2 text-sm text-gray-700"
+            aria-labelledby="dropdownInformationButton"
+          >
+            <li>
+              <a
+                href="{% url 'dashboard:index' %}"
+                class="block px-4 py-2 hover:bg-gray-100"
+                >Dashboard</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'core:edit_profile' %}"
+                class="block px-4 py-2 hover:bg-gray-100"
+                >Edit Profile</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'conversation:inbox' %}"
+                class="block px-4 py-2 hover:bg-gray-100"
+                >Inbox</a
+              >
+            </li>
+          </ul>
+          <div class="py-2">
+            <a
+              href="{% url 'core:logout' %}"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >Sign Out</a
+            >
+          </div>
+        </div>
+
+        <script>
+          const dropdownButton = document.getElementById(
+            "dropdownInformationButton"
+          );
+          const dropdownMenu = document.getElementById("dropdownInformation");
+
+          dropdownButton.addEventListener("click", function (event) {
+            event.stopPropagation();
+            dropdownMenu.classList.toggle("hidden");
+          });
+
+          document.addEventListener("click", function (event) {
+            if (
+              !dropdownMenu.contains(event.target) &&
+              event.target !== dropdownButton
+            ) {
+              dropdownMenu.classList.add("hidden");
+            }
+          });
+        </script>
+
+        {% else %}
+        <a
+          href="{% url 'core:signup' %}"
+          class="inline-block px-6 py-2.5 text-sm font-medium text-gray-900 border border-gray-800 rounded-lg hover:text-white hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300"
+          >Sign Up</a
+        >
+        <a
+          href="{% url 'core:login' %}"
+          class="bg-grey hover:bg-grey text-grey-darkest py-2 px-4 rounded inline-flex items-center"
+        >
+          <span>Login</span>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+</body>
+</html>

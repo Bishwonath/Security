@@ -1,0 +1,90 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Edit Profile {% endblock %}
+
+{% block content %}
+<section class="bg-white dark:bg-white">
+    <div class="py-8 px-4 mx-auto lg:py-16">
+        <div class="w-full relative mt-4 shadow-2xl rounded my-24 overflow-hidden">
+            <div class="top h-32 w-full bg-blue-600 overflow-hidden relative">
+                <img src="https://media.istockphoto.com/id/931461588/vector/workers-standing-together.jpg?s=2048x2048&w=is&k=20&c=tsq1a5tBXEHabSXUF_GvX5JE7g5OOTzkAhYcQqJ3LTM=" alt="" class="bg w-full h-full object-cover object-center absolute z-0">
+                <div class="flex flex-col justify-center items-center relative h-full bg-black bg-opacity-50 text-white">
+                    <h1 class="text-2xl font-semibold">{{ request.user.username }}</h1>
+                    <h4 class="text-sm font-semibold">{{ request.user.email }}</h4>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 bg-white ">
+                <div class="col-span-12 w-full px-3 py-6 justify-center flex space-x-4 border-b border-solid md:space-x-0 md:space-y-4 md:flex-col md:col-span-2 md:justify-start ">
+                    <a href="javascript:void(0);" onclick="showSection('username-email')" class="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">Username & Email</a>
+                    <a href="javascript:void(0);" onclick="showSection('change-password')" class="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">Change Password</a>
+                    <a href="javascript:void(0);" onclick="showSection('delete-account')" class="text-sm p-2 bg-indigo-200 text-center rounded font-semibold hover:bg-indigo-700 hover:text-gray-200">Delete Account</a>
+                </div>
+                <div class="col-span-12 md:border-solid md:border-l md:border-black md:border-opacity-25 h-full pb-12 md:col-span-10">
+                    <div class="px-4 pt-4" id="username-email-section">
+                        <!-- ... Username & Email content ... -->
+                        <form method="post">
+                            {% csrf_token %}
+                            <h3 class="text-2xl font-semibold">Username & Email</h3>
+                            <hr>
+                            <div class="form-item">
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Username:</label>
+                                {{ user_form.username }}
+                            </div>
+                            <div class="form-item">
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Email:</label>
+                                {{ user_form.email }}
+                            </div>
+                            <button type="submit" name="change_user_info" class="text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 mt-4 mb-2">
+                                Save Changes
+                            </button>
+                        </form>
+                    </div>
+                    <div class="px-4 pt-4" id="change-password-section" style="display:none;">
+                        <!-- ... Change Password content ... -->
+                        <form method="post">
+                            {% csrf_token %}
+                            <h3 class="text-2xl font-semibold">Change Password</h3>
+                            <hr>
+                            <div class="form-item">
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Enter Old Password:</label>
+                                {{ password_form.old_password }}
+                            </div>
+                            <div class="form-item">
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">New Password:</label>
+                                {{ password_form.new_password1 }}
+                            </div>
+                            <div class="form-item">
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Confirm New Password:</label>
+                                {{ password_form.new_password2 }}
+                            </div>
+                            <label for="des" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">⚠️ Password and retyped password must be the same</label>
+                            <button type="submit" name="change_password" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 mt-4 mb-2">
+                                Change Password
+                            </button>
+                        </form>
+                    </div>
+                    <div class="px-4 pt-4" id="delete-account-section" style="display:none;">
+                        <!-- ... Delete Account content ... -->
+                        <form method="post" action="{% url 'core:delete_account' %}">
+                            {% csrf_token %}
+                            <h3 class="text-2xl font-semibold">Delete Account</h3>
+                            <hr>
+                            <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-4 py-2 mt-4 mb-4">
+                                Delete Account
+                            </button>
+                            <label for="des" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">⚠️ Your account will be deleted permanently</label>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function showSection(section) {
+                    document.getElementById('username-email-section').style.display = (section === 'username-email') ? 'block' : 'none';
+                    document.getElementById('change-password-section').style.display = (section === 'change-password') ? 'block' : 'none';
+                    document.getElementById('delete-account-section').style.display = (section === 'delete-account') ? 'block' : 'none';
+                }
+            </script>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'core/base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Post</title>
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="mx-6">
+        <section class="container mx-auto py-8 ">
+        <div class="bg-gradient-to-r from-yellow-100 to-indigo-100 shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
+            <h2 class="mb-4 text-2xl font-bold text-gray-900">Add a new post</h2>
+            <h2 class="mb-4 text-l font-bold text-gray-900 dark:text-black">You can edit your details later..</h2>
+            <form method="post" action="." enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mb-4">
+                        <label for="id_Category" class="block mb-2 text-sm font-medium text-gray-700">Category:</label>
+                        {{ form.Category }}
+                    </div>
+                    <div class="mb-4">
+                        <label for="id_name" class="block mb-2 text-sm font-medium text-gray-700">Name:</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="mb-4 col-span-2">
+                        <label for="id_description" class="block mb-2 text-sm font-medium text-gray-700 ">Description:</label>
+                        {{ form.description }}
+                    </div>
+                    <div class="mb-4">
+                        <label for="id_location" class="block mb-2 text-sm font-medium text-gray-700">Location:</label>
+                        {{ form.location }}
+                    </div>
+                
+                    <div class="mb-4">
+                        <label for="id_price" class="block mb-2 text-sm font-medium text-gray-700">Price:</label>
+                        {{ form.price }}
+                    </div>
+                    <div class="mb-4">
+                        <label for="id_image" class="block mb-2 text-sm font-medium text-gray-700">Image:</label>
+                        {{ form.image }}
+                    </div>
+                    <div class="mb-4">
+                        <label for="id_phone_number" class="block mb-2 text-sm font-medium text-gray-700">Phone Number:</label>
+                        {{ form.phone_number }}
+                    </div>
+                    <div class="mb-4">
+                        <label for="id_email" class="block mb-2 text-sm font-medium text-gray-700">Email:</label>
+                        {{ form.email }}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="id_facebook" class="block mb-2 text-sm font-medium text-gray-700">Facebook:</label>
+                        {{ form.facebook }}
+                    </div>
+                    <div class="mb-4">
+                        <label for="id_instagram" class="block mb-2 text-sm font-medium text-gray-700">Instagram:</label>
+                        {{ form.instagram }}
+                    </div>
+                    <div class="mb-4">
+                        <label for="id_qr" class="block mb-2 text-sm font-medium text-gray-700">QR Code:</label>
+                        {{ form.qr }}
+                    </div>
+
+                   
+                    <div class="mb-4">
+                        <label for="id_is_available" class="block mb-2 text-sm font-medium text-gray-700">Is Available:</label>{{ form.is_available }}
+                        <label for="id_is_negotiable" class="block mb-2 text-sm font-medium text-gray-700">Is Negotiable:</label>{{ form.is_negotiable }}
+                    </div>
+                    
+                    
+                    
+                </div>
+                <label for="des" class=" block mb-2 text-m font-medium text-gray-900 dark:black">⚠️ Please fill all the boxes with valid credentials</label>
+                <div class="flex items-center">
+                    <input id="link-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-black dark:text-black">I agree with the <a href="{%url 'core:terms'%}" class="text-blue-600 dark:text-blue-500 hover:underline">terms and conditions</a>.</label>
+                </div>
+                {% if form.errors or form.non_field_errors %}
+                <div class="mt-2 p-4 bg-red-100 rounded-xl">
+                    {% for field in form %}
+                        {{ field.errors }}
+                    {% endfor %}
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+                <button class="mt-6 py-3 px-6 text-sm bg-blue-500 hover:bg-blue-700 text-gray-50 font-bold rounded-full" type="submit">+ Add Post</button>
+            </form>
+        </div>
+        </section>
+    </div>
+</body>
+</html>
+
+    
+
+
+{% endblock %}

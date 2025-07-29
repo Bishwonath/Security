@@ -1,0 +1,45 @@
+{% extends "core/base.html" %}
+{% block title %}Conversation{% endblock %}
+
+{% block content %}
+    <div class="mx-10 mt-3 border border-gray-300 rounded-lg p-4 bg-gradient-to-r from-yellow-100 to-indigo-100">
+        <h1 class="mb-6 text-3xl">Conversation History</h1>
+        <hr class="border-b-2 border-gray-400 mb-6">
+
+        <div id="conversationContainer" class="space-y-6 max-h-96 overflow-y-auto">
+            {% for message in conversation.messages.all %}
+                <div class="{% if message.created_by == request.user %}flex justify-end items-center{% else %}flex items-center{% endif %}">
+                    <div class="p-4 max-w-xs rounded-lg {% if message.created_by == request.user %}bg-blue-600 text-white self-end{% else %}bg-gray-200 self-start{% endif %} border border-gray-300">
+                        <p class="mb-2 text-sm">
+                            <strong class="text-lg">{{ message.created_by.username }}</strong> <span class="text-xs text-black">@{{ message.created_at }}</span>
+                        </p>
+                        <p class="text-sm">{{ message.content }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <form id="messageForm" method="post" action="." class="mt-6 bg-white">
+            {% csrf_token %}
+            <div class="px-6 flex items-center border rounded-lg">
+                <textarea id="messageInput" name="content" class="w-full rounded-lg border-none p-2 mr-2 focus:outline-none" placeholder="Type your message"></textarea>
+                <button type="submit" class="py-4 px-6 text-sm flex justify-between bg-teal-500 hover:bg-teal-700 rounded-lg text-white transition duration-300 ease-in-out">Send 
+                    <svg class="ml-3" xmlns="http://www.w3.org/2000/svg" width="18pt" height="18pt" viewBox="0 0 64 64" style="isolation:isolate" id="send"><defs><clipPath id="a"><rect width="64" height="64"></rect></clipPath></defs><g clip-path="url(#a)"><path d=" M 8.216 36.338 L 26.885 32.604 C 28.552 32.271 28.552 31.729 26.885 31.396 L 8.216 27.662 C 7.104 27.44 6.021 26.356 5.799 25.245 L 2.065 6.576 C 1.731 4.908 2.714 4.133 4.259 4.846 L 61.228 31.139 C 62.257 31.614 62.257 32.386 61.228 32.861 L 4.259 59.154 C 2.714 59.867 1.731 59.092 2.065 57.424 L 5.799 38.755 C 6.021 37.644 7.104 36.56 8.216 36.338 Z "></path></g></svg>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Scroll to the bottom of the conversationContainer
+        var conversationContainer = document.getElementById('conversationContainer');
+        conversationContainer.scrollTop = conversationContainer.scrollHeight;
+
+        document.getElementById('messageInput').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                document.getElementById('messageForm').submit();
+            }
+        });
+    </script>
+{% endblock %}
