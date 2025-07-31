@@ -29,3 +29,40 @@ User logged out: admin (ID: 10) from IP: 127.0.0.1
 "GET /logout/ HTTP/1.1" 302 0
 "GET /login/ HTTP/1.1" 200 16902
 "GET / HTTP/1.1" 200 65068
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 65068
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 65068
+"GET /media/static/images/sliderasda.png HTTP/1.1" 304 0
+"GET /static/images/fixedwidth%20mathi%20ko.png HTTP/1.1" 304 0
+"GET /media/static/images/nayaslider.png HTTP/1.1" 304 0
+"GET /media/static/images/infophoto.png HTTP/1.1" 304 0
+"GET /media/static/images/bichtirakonestfixer.png HTTP/1.1" 304 0
+"GET /items/ HTTP/1.1" 200 20009
+Watching for file changes with StatReloader
+C:\Users\Acer\Downloads\Security\Security\nestfixer\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 65068
+"GET /media/static/images/sliderasda.png HTTP/1.1" 200 159420
+"GET /static/images/fixedwidth%20mathi%20ko.png HTTP/1.1" 200 601650
+"GET /media/static/images/electricain.png HTTP/1.1" 200 32740
+"GET /media/static/images/nayaslider.png HTTP/1.1" 200 437127
+"GET /media/static/images/plumber.png HTTP/1.1" 200 23260
+"GET /static/images/logo.png HTTP/1.1" 200 41336
+"GET /media/static/images/painter.png HTTP/1.1" 200 25145
+"GET /media/static/images/furniture.png HTTP/1.1" 200 25182
+"GET /media/static/images/conditioniong.png HTTP/1.1" 200 27700
+"GET /media/static/images/carpenter.png HTTP/1.1" 200 25348
+"GET /media/static/images/repairmen.png HTTP/1.1" 200 28057
+"GET /media/static/images/mechanic.png HTTP/1.1" 200 28804
+"GET /media/static/images/infophoto.png HTTP/1.1" 200 80170
+"GET /media/static/images/bichtirakonestfixer.png HTTP/1.1" 200 96309
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 5219
+"GET /items/ HTTP/1.1" 200 20009
+"GET /login/ HTTP/1.1" 200 16902
+"GET /signup/ HTTP/1.1" 200 17317
+"GET /login/ HTTP/1.1" 200 16902
