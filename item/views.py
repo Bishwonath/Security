@@ -45,16 +45,13 @@ def items(request):
         min_price = request.GET.get('min_price', '')
         max_price = request.GET.get('max_price', '')
 
-        # Filter items based on is_negotiable
         if is_negotiable != '':
             items = items.filter(is_negotiable=is_negotiable)
 
-        # Filter items based on price range
         if min_price:
             items = items.filter(price__gte=min_price)
         if max_price:
             items = items.filter(price__lte=max_price)
-    # ... (existing code)
 
     return render(request, 'item/items.html', {
         'items': items,
