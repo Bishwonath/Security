@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'axes',
     'conversation',
     'item',
     'dashboard',
@@ -54,10 +55,20 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'axes.middleware.AxesMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+
+AXES_FAILURE_LIMIT = 5  # Number of allowed failures
+AXES_COOLOFF_TIME = 1  # Lockout time in hours
+AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True
 
 
 # Session expires after 15 minutes of inactivity
