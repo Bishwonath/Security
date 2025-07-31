@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'core',
     'axes',
     'conversation',
+    'sslserver',
     'item',
     'dashboard',
 ]
@@ -177,3 +178,28 @@ EMAIL_HOST_USER= 'nestfixer1@gmail.com'
 EMAIL_HOST_PASSWORD = 'password'
 
 
+import os
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'activity_file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'activity.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['activity_file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'activity': {
+            'handlers': ['activity_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
