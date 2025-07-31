@@ -1,7 +1,6 @@
 from django import forms
 from .models import Item
 
-# Define common classes for styling
 INPUT_CLASSES = 'w-full py-4 px-6 rounded-xl border'
 CHECKBOX_CLASSES = 'border'
 SELECT_CLASSES = 'w-full py-4 px-6 rounded-xl border'
