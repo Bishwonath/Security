@@ -36,6 +36,8 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 
+#Packages installed for burpsuits
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
