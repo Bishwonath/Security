@@ -75,7 +75,7 @@ AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True
 
 
 # Session expires after 15 minutes of inactivity
-SESSION_COOKIE_AGE = 18000  # 900 seconds = 15 minutes
+SESSION_COOKIE_AGE = 18000  
 
 # Session ends when the browser is closed
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -85,7 +85,7 @@ SESSION_COOKIE_SECURE = True        # Only send over HTTPS
 SESSION_COOKIE_HTTPONLY = True      # Not accessible to JavaScript
 SESSION_COOKIE_SAMESITE = 'Lax'     # Protect from CSRF
 
-ROOT_URLCONF = 'nestfixer.urls'
+ROOT_URLCONF = 'gharkoservices.urls'
 
 TEMPLATES = [
     {
@@ -103,7 +103,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'nestfixer.wsgi.application'
+WSGI_APPLICATION = 'gharkoservices.wsgi.application'
 
 
 # Database
@@ -112,7 +112,7 @@ WSGI_APPLICATION = 'nestfixer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'nestfixer',
+        'NAME': 'gharkoservices',
         'USER':'postgres',
         'PASSWORD':'9843743511',
         'HOST':'localhost',
@@ -176,7 +176,7 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST= 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS= True
-EMAIL_HOST_USER= 'nestfixer1@gmail.com'
+EMAIL_HOST_USER= 'gharkoservices@gmail.com'
 EMAIL_HOST_PASSWORD = 'password'
 
 
